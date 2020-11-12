@@ -18,7 +18,7 @@ app.controller('sendMessageController', function($scope,$http) {
             $scope.error="Name Can't be empty!";
             flag=false;
         }else if($scope.email == null || $scope.email == ""){
-            $scope.error="Email Can't be empty!";
+            $scope.error="Please Enter Valid email.";
             flag=false;
         }else if($scope.subject == null || $scope.subject == ""){
             $scope.error="Subject Can't be empty!";
@@ -27,8 +27,10 @@ app.controller('sendMessageController', function($scope,$http) {
             $scope.error="Message Can't be empty!";
             flag=false;
         }
-
-        if(flag){
+        $("#loaderGif").removeAttr("style");
+        $("#sendMessageButton").prop('disabled', true);
+        $('#myModal').modal('toggle');
+        if(!flag){
             $scope.error="";
             $("#loaderGif").removeAttr("style");
             $("#sendMessageButton").prop('disabled', true);
