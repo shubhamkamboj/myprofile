@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import net.codejava.mailSender.SendMail;
 import net.codejava.model.SendMessage;
 import net.codejava.services.SendMessageService;
 
@@ -19,6 +20,9 @@ public class AppController {
 
 	@Autowired
 	private SendMessageService service; 
+	
+	@Autowired
+	private SendMail sendMail;
 	
 	@RequestMapping("/")
 	public String viewHomePage(Model model) {
@@ -38,8 +42,10 @@ public class AppController {
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String saveMessage(@ModelAttribute("sendMessage") SendMessage sendMessage) {
-		service.save(sendMessage);
 		
+		service.save(sendMessage);
+		List<SendMessage> listProducts = service.listAll();
+		sendMail.sendEmail("shubham.s.kamboj@gmail.com", "New Record Found on my profile",listProducts.toString());
 		return "index";
 	}
 	
