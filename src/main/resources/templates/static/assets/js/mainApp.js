@@ -6,24 +6,49 @@ function getContextPath() {
 
 app.controller('sendMessageController', function($scope,$http) {
     
-   $("#sendMessageButton").prop('disabled', true);
+   
     
-    
+ /* functionstart*/
     $scope.sendMessageData=function(){
-    
-    var sendMessage={
-    name:$scope.name,
-    email:$scope.email,
-    subject:$scope.subject,
-    message:$scope.message
-    };
 
-$http.post('/save', JSON.stringify(sendMessage)).then(function (response) {
-location.reload();
-});
+
+        var flag = true;
+
+        if($scope.name == null || $scope.name == "" ){
+            $scope.error="Name Can't be empty!";
+            flag=false;
+        }else if($scope.email == null || $scope.email == ""){
+            $scope.error="Email Can't be empty!";
+            flag=false;
+        }else if($scope.subject == null || $scope.subject == ""){
+            $scope.error="Subject Can't be empty!";
+            flag=false;
+        }else if($scope.message == null || $scope.message == ""){
+            $scope.error="Message Can't be empty!";
+            flag=false;
+        }
+
+        if(flag){
+            $scope.error="";
+            $("#loaderGif").removeAttr("style");
+            $("#sendMessageButton").prop('disabled', true);
+            $('#myModal').modal('toggle');
+            var sendMessage={
+            name:$scope.name,
+            email:$scope.email,
+            subject:$scope.subject,
+            message:$scope.message
+            };
+        $http.post('/save', JSON.stringify(sendMessage)).then(function (response) {
+        location.reload();
+        });
+        }
+
+
+        
     
     }
-    
+    /*functionend*/ 
   
 
     
