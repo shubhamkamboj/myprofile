@@ -27,10 +27,8 @@ app.controller('sendMessageController', function($scope,$http) {
             $scope.error="Message Can't be empty!";
             flag=false;
         }
-        $("#loaderGif").removeAttr("style");
-        $("#sendMessageButton").prop('disabled', true);
-        $('#myModal').modal('toggle');
-        if(!flag){
+       
+        if(flag){
             $scope.error="";
             $("#loaderGif").removeAttr("style");
             $("#sendMessageButton").prop('disabled', true);
