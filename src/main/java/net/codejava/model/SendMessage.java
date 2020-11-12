@@ -1,5 +1,7 @@
 package net.codejava.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,7 +14,7 @@ public class SendMessage {
 	private String email;
 	private String message;
 	private String subject;
-	
+	private Date date;
 
 	public SendMessage() {
 	}
@@ -66,6 +68,14 @@ public class SendMessage {
 
 	public void setSubject(String subject) {
 		this.subject = subject;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = new Date();
 	}
 
 	

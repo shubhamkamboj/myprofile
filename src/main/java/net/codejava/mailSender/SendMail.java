@@ -29,18 +29,18 @@ public class SendMail {
 	        javaMailSender.send(msg);
 	}
 	
-	 void sendEmailWithAttachment() throws MessagingException, IOException{
+	 public void sendEmailWithAttachment(String to,String subject,String text) throws MessagingException, IOException{
 		 MimeMessage msg = javaMailSender.createMimeMessage();
 
 	        // true = multipart message
 	        MimeMessageHelper helper = new MimeMessageHelper(msg, true);
-	        helper.setTo("1@gmail.com");
+	        helper.setTo(to);
 
-	        helper.setSubject("Testing from Spring Boot");
+	        helper.setSubject(subject);
 
-	        helper.setText("<h1>Check attachment for image!</h1>", true);
+	        helper.setText(text, true);
 
-	        helper.addAttachment("my_photo.png", new ClassPathResource("android.png"));
+	       // helper.addAttachment("my_photo.png", new ClassPathResource("android.png"));
 
 	        javaMailSender.send(msg);	
 	 }
